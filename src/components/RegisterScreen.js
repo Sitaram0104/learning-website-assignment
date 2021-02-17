@@ -11,12 +11,11 @@ function RegisterScreen() {
 
   const populateInterests = async (value) => {
     const res = await fetch(
-      `https://webit-keyword-search.p.rapidapi.com/autosuggest?q=${value}&language=en`,
+      `${process.env.REACT_APP_RAPID_API_GET_URL}?q=${value}&language=en`,
       {
         headers: {
-          "x-rapidapi-host": "webit-keyword-search.p.rapidapi.com",
-          "x-rapidapi-key":
-            "28728db04dmsh34d3f140dd059fap1c388ejsn7288577afcf7",
+          "x-rapidapi-host": process.env.REACT_APP_RAPID_API_GET_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_GET_KEY,
         },
       }
     );
@@ -48,20 +47,22 @@ function RegisterScreen() {
     e.preventDefault();
     if (name && email && interestList.length > 0 && interestList.length <= 3) {
       const res = await axios.post(
-        "https://testpostapi1.p.rapidapi.com/testBatmanApi/name/register",
+        process.env.REACT_APP_RAPID_API_POST_URL,
         { name, email, interests: interestList.join(", ") },
         {
           headers: {
             accept: " success",
             "content-type": " application/x-www-form-urlencoded",
-            "x-rapidapi-host": "testpostapi1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "28728db04dmsh34d3f140dd059fap1c388ejsn7288577afcf7",
+            "x-rapidapi-host": process.env.REACT_APP_RAPID_API_POST_HOST,
+            "x-rapidapi-key": process.env.REACT_APP_RAPID_API_POST_KEY,
           },
         }
       );
       // console.log(res);
-      M.toast({ html: "registration successful", classes: "green" });
+      if (res.statusText === "OK") {
+        // console.log("ok");
+        M.toast({ html: "registration successful", classes: "green" });
+      }
     }
     if (!name) {
       M.toast({ html: "Name cannot be empty", classes: "red" });
