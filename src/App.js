@@ -1,22 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Link, Route } from "react-router-dom";
+import RegisterScreen from "./components/RegisterScreen";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h3>Logo</h3>
+        {location.pathname === "/" ? (
+          <Link to="/register">Go To Register screen</Link>
+        ) : (
+          <Link to="/">Go Back to home screen</Link>
+        )}
+
+        <Route path="/register" component={RegisterScreen} />
       </header>
     </div>
   );
