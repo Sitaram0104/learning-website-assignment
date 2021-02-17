@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import M from "materialize-css";
 
@@ -47,20 +47,20 @@ function RegisterScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (name && email && interestList.length > 0 && interestList.length <= 3) {
-      //   const res = await axios.post(
-      //     "https://testpostapi1.p.rapidapi.com/testBatmanApi/name/register",
-      //     { name, email, interests: interestList.join(", ") },
-      //     {
-      //       headers: {
-      //         accept: " success",
-      //         "content-type": " application/x-www-form-urlencoded",
-      //         "x-rapidapi-host": "testpostapi1.p.rapidapi.com",
-      //         "x-rapidapi-key":
-      //           "28728db04dmsh34d3f140dd059fap1c388ejsn7288577afcf7",
-      //       },
-      //     }
-      //   );
-      //   console.log(res);
+      const res = await axios.post(
+        "https://testpostapi1.p.rapidapi.com/testBatmanApi/name/register",
+        { name, email, interests: interestList.join(", ") },
+        {
+          headers: {
+            accept: " success",
+            "content-type": " application/x-www-form-urlencoded",
+            "x-rapidapi-host": "testpostapi1.p.rapidapi.com",
+            "x-rapidapi-key":
+              "28728db04dmsh34d3f140dd059fap1c388ejsn7288577afcf7",
+          },
+        }
+      );
+      // console.log(res);
       M.toast({ html: "registration successful", classes: "green" });
     }
     if (!name) {
